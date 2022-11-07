@@ -41,7 +41,7 @@ results = results.sort_values(by='inlink score', ascending=False)
 results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'links_url']]
 
 st.header('Crawl Data')
-st..dataframe(results)
+st.dataframe(results)
 
 @st.cache
 def convert_df(results):
