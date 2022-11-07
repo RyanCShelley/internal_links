@@ -93,4 +93,4 @@ for node in GA:
 
 plt.figure(3, figsize=(50, 50))
 nx.draw(GA, node_color=color_map, with_labels=False)
-st.pyplot(fig)
+plt.show()
