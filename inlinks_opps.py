@@ -125,5 +125,8 @@ score = st.number_input('Set Max Inlink Score')
 
 
 inlink_opps_score = results[results['inlink score'] < score]
+inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('category')]
+inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('author')]
+inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('tag')]
 
 st.dataframe(inlink_opps_score)
