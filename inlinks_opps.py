@@ -150,7 +150,7 @@ def convert_df(inlink_ops):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return inlink_ops.to_csv().encode('utf-8')
 
-csv = convert_df(rinlink_ops)
+csv = convert_df(inlink_ops)
 
 st.download_button(
     label="Download data as CSV",
