@@ -91,6 +91,6 @@ for node in GA:
     else: color_map.append("green") 
 
 
-plt.figure(3, figsize=(50, 50))
+fig = plt.figure(3, figsize=(50, 50))
 nx.draw(GA, node_color=color_map, with_labels=False)
-plt.show()
+st.pyplot(fig)
