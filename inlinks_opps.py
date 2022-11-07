@@ -4,6 +4,10 @@ from advertools import crawl
 import pandas as pd
 from collections import OrderedDict
 import numpy as np
+import plotly.express as px
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy as np
 
 st.set_page_config(layout="wide")
 st.sidebar.title('Internal Links Tool')
@@ -59,7 +63,7 @@ st.download_button(
     mime='text/csv',
 )
 
-import plotly.express as px
+st.header('Internal Link Graphs')
 
 fig = px.scatter(results, x="links on page", y="total_inlinks", color="inlink score",
                  size='inlink score', hover_data=['url'])
@@ -78,9 +82,6 @@ network = pd.DataFrame({
 network = network[network["url"].str.contains(site)]
 network = network[network["links_url"].str.contains(site)]
 
-import networkx as nx
-import matplotlib.pyplot as plt
-import numpy as np
 
 GA = nx.from_pandas_edgelist(network, source="url", target="links_url")
 
