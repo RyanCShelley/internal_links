@@ -8,6 +8,11 @@ import plotly.express as px
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+from rake_nltk import Rake
+rake_nltk_var = Rake()
 
 st.set_page_config(layout="wide")
 st.sidebar.title('Internal Links Tool')
@@ -63,35 +68,26 @@ st.download_button(
     mime='text/csv',
 )
 
-st.header('Internal Link Graphs')
-
-fig = px.scatter(results, x="links on page", y="total_inlinks", color="inlink score",
-                 size='inlink score', hover_data=['url'])
-st.plotly_chart(fig, use_container_width=True)
 
 
-network_df = results[['url','links_url']]
-lst_col = 'links_url' 
-x = network_df.assign(**{lst_col:network_df[lst_col].str.split(',')})
+results = results.dropna(subset=['title'])
+nltk_terms = []
 
-network = pd.DataFrame({
-    col:np.repeat(x[col].values, x[lst_col].str.len())
-    for col in x.columns.difference([lst_col])
-    }).assign(**{lst_col:np.concatenate(x[lst_col].values)})[x.columns.tolist()]
+# Loop items in results
+for text in results['title']:
+  rake_nltk_var.extract_keywords_from_text(text)
+  keyword_extracted = rake_nltk_var.get_ranked_phrases()[:1]
+  if keyword_extracted is not None: # assuming the download was successful
+    nltk_terms.append(keyword_extracted)
+  
 
-network = network[network["url"].str.contains(site)]
-network = network[network["links_url"].str.contains(site)]
+results["keyword"] = nltk_terms
 
+results['keyword'] = [','.join(map(str, l)) for l in results['keyword']]
+results.keyword.str.split(expand=True).stack().value_counts()
 
-GA = nx.from_pandas_edgelist(network, source="url", target="links_url")
+keywords = results.keyword.str.split(expand=True).stack().value_counts()
+keywords.columns = ["Keyword", "Frequency"]
 
-color_map = []
-for node in GA:
-    if node in network["url"].values:
-        color_map.append("blue")
-    else: color_map.append("green") 
-
-
-fig = plt.figure(3, figsize=(50, 50))
-nx.draw(GA, node_color=color_map, with_labels=False)
-st.pyplot(fig)
+st.header('Keyword Frequency')
+st.dataframe(Keywords)
