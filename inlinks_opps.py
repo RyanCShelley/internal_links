@@ -4,7 +4,8 @@ from advertools import crawl
 import pandas as pd
 
 st.sidebar.title("Internal Link Tool", anchor=None)
-site = st.text_input("Add Your Website", max_chars=None, label_visibility="visible")
+st.sidebar.subheader('Add Your URL')
+site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibility="visible")
 
 if site is not None:
 	crawl(site, 'crawl.jl', follow_links=True)
