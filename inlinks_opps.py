@@ -130,9 +130,11 @@ inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('ta
 
 st.dataframe(inlink_opps_score)
 
+
 st.header('Finding URLs to Link To')
 target_url = st.text_input('What URL are you wanting to build links to')
 target_keyword = st.text_input('What is the target keyword for the page you want to build links to')
+target_keyword = target_keyword .lower()
 st.text("""We only want to build inlinks from pages with a higher score than the page we are working on. So check the inlinks score of the page you are wanting to link from and add that number below""" )
 page_inlink_score = st.number_input('Set URL Inlink Score')
 
@@ -143,14 +145,14 @@ inlink_ops = inlink_ops[inlink_ops['inlink score'] > page_inlink_score]
 inlink_ops = inlink_ops.drop(columns=['links_url','body_text'])
 
 
-st.dataframe(inlink_ops, use_container_width=True)
+st.dataframe(inlink_ops)
 
 @st.cache
 def convert_df(inlink_ops):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return inlink_ops.to_csv().encode('utf-8')
 
-csv = convert_df(inlink_ops)
+csv = convert_df(inlink_ops, use_container_width=True)
 
 st.download_button(
     label="Download data as CSV",
