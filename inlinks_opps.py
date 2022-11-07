@@ -37,7 +37,7 @@ for link in results['total_inlinks']:
   inlink_score.append(score)
   
 results["inlink score"] = inlink_score
-
+results = results.sort_values(by='inlink score', ascending=False)
 results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'links_url']]
 
 st.header('Crawl Data')
