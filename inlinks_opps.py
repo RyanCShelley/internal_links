@@ -120,7 +120,8 @@ results.body_text = results.apply(lambda row: " ".join(filter(lambda x:x[0]!="@"
 results.body_text = results.apply(lambda row: " ".join(re.sub("[^a-zA-Z]+", " ", row.body_text).split()), 1)
 
 
-score = st.slider('Set Max Inlink Score', 0, 1, 10)
+
+score = st.number_input('Set Max Inlink Score')
 
 
 inlink_opps_score = results[results['inlink score'] < score]
