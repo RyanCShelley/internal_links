@@ -87,6 +87,8 @@ results['keyword'] = [','.join(map(str, l)) for l in results['keyword']]
 results.keyword.str.split(expand=True).stack().value_counts()
 keywords = results.keyword.str.split(expand=True).stack().value_counts()
 keywords = keywords.to_frame()
+keywords = keywords.reset_index()
+keywords.columns = ["Keyword", "Frequnecy"]
 
 st.header('Keyword Frequency')
 st.dataframe(keywords)
