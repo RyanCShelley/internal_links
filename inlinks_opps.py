@@ -57,3 +57,8 @@ st.download_button(
     mime='text/csv',
 )
 
+import plotly.express as px
+
+fig = px.scatter(results, x="links on page", y="total_inlinks", color="inlink score",
+                 size='inlink score', hover_data=['url'])
+fig.show()
