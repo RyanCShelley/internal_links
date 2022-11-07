@@ -89,7 +89,7 @@ keywords = results.keyword.str.split(expand=True).stack().value_counts()
 keywords = keywords.to_frame()
 keywords = keywords.reset_index()
 keywords.columns = ["Keyword", "Frequnecy"]
-fig = px.bar(keywords, x='Keyword', y='Frequnecy')
+fig = px.bar(keywords, x='Frequnecy ', y='Keyword')
 fig.show()
 
 st.header('Keyword Frequency')
