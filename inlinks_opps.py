@@ -90,7 +90,7 @@ keywords = results.keyword.str.split(expand=True).stack().value_counts()
 column_names=["Keyword","Frequency"]
 
 # Create DataFrame by assigning column names
-keywords=pd.DataFrame(keywords columns=column_names)
+keywords=pd.DataFrame(keywords, columns=column_names)
 
 st.header('Keyword Frequency')
 st.dataframe(keywords)
