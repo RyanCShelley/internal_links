@@ -61,4 +61,5 @@ import plotly.express as px
 
 fig = px.scatter(results, x="links on page", y="total_inlinks", color="inlink score",
                  size='inlink score', hover_data=['url'])
-fig.show()
+st.plotly_chart(fig, use_container_width=True)
+
