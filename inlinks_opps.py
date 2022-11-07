@@ -86,11 +86,9 @@ results["keyword"] = nltk_terms
 results['keyword'] = [','.join(map(str, l)) for l in results['keyword']]
 results.keyword.str.split(expand=True).stack().value_counts()
 keywords = results.keyword.str.split(expand=True).stack().value_counts()
-# Column names to be added
-column_names=["Keyword","Frequency"]
+keywords = keywords.to_frame()
+keywords.columns =["Keyword","Frequency"]
 
-# Create DataFrame by assigning column names
-keywords=pd.DataFrame(keywords, columns=column_names)
 
 st.header('Keyword Frequency')
 st.dataframe(keywords)
