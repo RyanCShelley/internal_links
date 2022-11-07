@@ -90,4 +90,4 @@ keywords = results.keyword.str.split(expand=True).stack().value_counts()
 keywords.columns = ["Keyword", "Frequency"]
 
 st.header('Keyword Frequency')
-st.dataframe(Keywords)
+st.dataframe(keywords)
