@@ -3,6 +3,8 @@ import advertools as adv
 from advertools import crawl
 import pandas as pd
 from collections import OrderedDict
+import numpy as np
+
 st.set_page_config(layout="wide")
 st.sidebar.title('Internal Links Tool')
 st.sidebar.subheader('Add Your URL')
