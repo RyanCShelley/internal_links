@@ -91,4 +91,10 @@ keywords = keywords.reset_index()
 keywords.columns = ["Keyword", "Frequnecy"]
 
 st.header('Keyword Frequency')
+
+col1, col2 = st.columns([3, 1])
+
+col1.bar_chart(keywords)
+
+col2.dataframe(keywords)
 st.dataframe(keywords)
