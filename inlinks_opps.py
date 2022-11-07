@@ -30,7 +30,7 @@ if site is not None:
 
 crawl_df = pd.read_json('crawl.jl', lines=True)
 
-new_df = crawl_df[['url','title','links_url','body']]
+new_df = crawl_df[['url','title','links_url','body_text']]
 new_df['links_url'] = new_df['links_url'].str.replace('@@',', ')
 new_df = new_df.dropna(subset=['links_url'])
 new_df['links_url'] = new_df['links_url'].str.split().apply(lambda x: OrderedDict.fromkeys(x).keys()).str.join(' ')
@@ -55,7 +55,7 @@ for link in results['total_inlinks']:
   
 results["inlink score"] = inlink_score
 results = results.sort_values(by='inlink score', ascending=False)
-results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body','links_url']]
+results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body_text','links_url']]
 
 st.header('Crawl Data')
 st.dataframe(results)
@@ -113,11 +113,11 @@ st.header('Finding URLs with Low Inlink Score')
 
 results = results.dropna()
 stop_words = stopwords.words('english')
-results['body'] = results['body'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop_words)]))
+results['body_text'] = results['body_text'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop_words)]))
 
-results.body = results.apply(lambda row: re.sub(r"http\S+", "", row.body).lower(), 1)
-results.body = results.apply(lambda row: " ".join(filter(lambda x:x[0]!="@", row.body.split())), 1)
-results.body = results.apply(lambda row: " ".join(re.sub("[^a-zA-Z]+", " ", row.body).split()), 1)
+results.body_text = results.apply(lambda row: re.sub(r"http\S+", "", row.body_text).lower(), 1)
+results.body_text = results.apply(lambda row: " ".join(filter(lambda x:x[0]!="@", body_text).split())), 1)
+results.body_text = results.apply(lambda row: " ".join(re.sub("[^a-zA-Z]+", " ", row.body_text).split()), 1)
 
 
 score = st.slider('Set Max Inlink Score', 0, 1, 10)
