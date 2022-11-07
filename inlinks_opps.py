@@ -3,7 +3,7 @@ import advertools as adv
 from advertools import crawl
 import pandas as pd
 
-
+st.sidebar.title(body, anchor=None)
 site = st.text_input("Add Your Website", max_chars=None, label_visibility="visible")
 
 if site is not None:
