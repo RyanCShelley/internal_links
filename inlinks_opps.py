@@ -13,6 +13,7 @@ nltk.download('stopwords')
 nltk.download('punkt')
 from rake_nltk import Rake
 rake_nltk_var = Rake()
+import trafilatura
 
 st.set_page_config(layout="wide")
 st.sidebar.title('Internal Links Tool')
@@ -99,4 +100,34 @@ col1, col2 = st.columns([3, 1])
 col1.plotly_chart(fig,use_container_width=True)
 
 col2.dataframe(keywords)
+
+st.header('Finding URLs with Low Inlink Score')
+
+content = []
+
+# Loop items in results
+for page in results['url']:
+  downloaded = trafilatura.fetch_url(page)
+  if downloaded is not None: # assuming the download was successful
+    content.append(trafilatura.extract(downloaded, include_tables=False, include_formatting=False, include_comments=False))
+  else:
+   content.append("No Text")
+
+results["content"] = content
+
+results = results.dropna()
+stop_words = stopwords.words('english')
+results['content'] = results['content'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop_words)]))
+
+results.content = results.apply(lambda row: re.sub(r"http\S+", "", row.content).lower(), 1)
+results.content = results.apply(lambda row: " ".join(filter(lambda x:x[0]!="@", row.content.split())), 1)
+results.content = results.apply(lambda row: " ".join(re.sub("[^a-zA-Z]+", " ", row.content).split()), 1)
+
+
+score = st.slider('Set Max Inlink Score', 0, 1, 10)
+
+
+inlink_opps_score = results[results['inlink score'] < score]
+
+col2.dataframe(inlink_opps_score)
 
