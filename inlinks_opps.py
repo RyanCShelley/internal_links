@@ -1,9 +1,10 @@
+import streamlit as st
 import advertools as adv
 from advertools import crawl
 import pandas as pd
 from collections import OrderedDict
 
-st.sidebar.title(body, anchor=None)
+st.sidebar.title('Internal Links Tool')
 st.sidebar.subheader('Add Your URL')
 site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibility="visible")
 
