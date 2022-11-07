@@ -3,3 +3,4 @@ networkx
 plotly-express
 matplotlib
 rake-nltk
+trafilatura
