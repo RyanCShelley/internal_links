@@ -63,3 +63,33 @@ fig = px.scatter(results, x="links on page", y="total_inlinks", color="inlink sc
                  size='inlink score', hover_data=['url'])
 st.plotly_chart(fig, use_container_width=True)
 
+
+network_df = results[['url','links_url']]
+lst_col = 'links_url' 
+x = network_df.assign(**{lst_col:network_df[lst_col].str.split(',')})
+
+network = pd.DataFrame({
+    col:np.repeat(x[col].values, x[lst_col].str.len())
+    for col in x.columns.difference([lst_col])
+    }).assign(**{lst_col:np.concatenate(x[lst_col].values)})[x.columns.tolist()]
+
+network = network[network["url"].str.contains(site)]
+network = network[network["links_url"].str.contains(site)]
+
+import networkx as nx
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+
+GA = nx.from_pandas_edgelist(network, source="url", target="links_url")
+
+color_map = []
+for node in GA:
+    if node in network["url"].values:
+        color_map.append("blue")
+    else: color_map.append("green") 
+
+
+plt.figure(3, figsize=(50, 50))
+nx.draw(GA, node_color=color_map, with_labels=False)
+st.pyplot(fig)
