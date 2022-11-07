@@ -42,3 +42,17 @@ results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink sco
 
 st.header('Crawl Data')
 st.table(results)
+
+@st.cache
+def convert_df(results):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return results.to_csv().encode('utf-8')
+
+csv = convert_df(results)
+
+st.download_button(
+    label="Download data as CSV",
+    data=csv,
+    file_name='internal_link_data.csv',
+    mime='text/csv',
+)
