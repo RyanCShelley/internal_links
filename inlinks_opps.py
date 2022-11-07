@@ -89,12 +89,15 @@ keywords = results.keyword.str.split(expand=True).stack().value_counts()
 keywords = keywords.to_frame()
 keywords = keywords.reset_index()
 keywords.columns = ["Keyword", "Frequnecy"]
+fig = px.bar(keywords, x='Keyword', y='Frequnecy')
+fig.show()
 
 st.header('Keyword Frequency')
 
 col1, col2 = st.columns([3, 1])
 
-col1.bar_chart(keywords)
+col1..plotly_chart(fig)
 
 col2.dataframe(keywords)
 st.dataframe(keywords)
+
