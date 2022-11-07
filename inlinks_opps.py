@@ -38,6 +38,6 @@ for link in results['total_inlinks']:
   
 results["inlink score"] = inlink_score
 
-results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'links_url	']]
+results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'links_url']]
 
 st.table(results)
