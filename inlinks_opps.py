@@ -86,7 +86,7 @@ results["keyword"] = nltk_terms
 results['keyword'] = [','.join(map(str, l)) for l in results['keyword']]
 results.keyword.str.split(expand=True).stack().value_counts()
 keywords = results.keyword.str.split(expand=True).stack().value_counts()
-keywords = keywords.columns["keyword","Frequency"]
+keywords.columns = ['A', 'B']
 
 
 st.header('Keyword Frequency')
