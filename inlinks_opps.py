@@ -116,7 +116,7 @@ stop_words = stopwords.words('english')
 results['body_text'] = results['body_text'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop_words)]))
 
 results.body_text = results.apply(lambda row: re.sub(r"http\S+", "", row.body_text).lower(), 1)
-results.body_text = results.apply(lambda row: " ".join(filter(lambda x:x[0]!="@", body_text).split())), 1)
+results.body_text = results.apply(lambda row: " ".join(filter(lambda x:x[0]!="@", body_text.split())), 1)
 results.body_text = results.apply(lambda row: " ".join(re.sub("[^a-zA-Z]+", " ", row.body_text).split()), 1)
 
 
