@@ -120,7 +120,6 @@ results.body_text = results.apply(lambda row: " ".join(filter(lambda x:x[0]!="@"
 results.body_text = results.apply(lambda row: " ".join(re.sub("[^a-zA-Z]+", " ", row.body_text).split()), 1)
 
 
-
 score = st.number_input('Set Max Inlink Score')
 
 
@@ -130,3 +129,31 @@ inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('au
 inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('tag')]
 
 st.dataframe(inlink_opps_score)
+
+st.header('Finding URLs to Link To')
+target_url = st.text_input('What URL are you wanting to build links to')
+target_keyword = st.text_input('What is the target keyword for the page you want to build links to')
+st.text("""We only want to build inlinks from pages with a higher score than the page we are working on. So check the inlinks score of the page you are wanting to link from and add that number below""" )
+page_inlink_score = st.number_input('Set URL Inlink Score')
+
+inlink_ops = results[results['content'].str.contains(target_keyword)]
+inlink_ops = inlink_ops[~inlink_ops['links_url'].str.contains(target_url)]
+inlink_ops = inlink_ops[inlink_ops['inlink score'] > page_inlink_score]
+
+inlink_ops = inlink_ops.drop(columns=['links_url','body_text'])
+
+@st.cache
+def convert_df(inlink_ops):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return inlink_ops.to_csv().encode('utf-8')
+
+csv = convert_df(rinlink_ops)
+
+st.download_button(
+    label="Download data as CSV",
+    data=csv,
+    file_name='internal_link_ops.csv',
+    mime='text/csv',
+)
+
+inlink_ops
