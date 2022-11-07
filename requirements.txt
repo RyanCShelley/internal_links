@@ -2,3 +2,4 @@ advertools
 networkx
 plotly-express
 matplotlib
+rake-nltk
