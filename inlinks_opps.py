@@ -90,4 +90,4 @@ keywords.columns = ['A', 'B']
 
 
 st.header('Keyword Frequency')
-st.dataframe(keywords)
+st.table(keywords)
