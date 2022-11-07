@@ -78,7 +78,7 @@ network = network[network["links_url"].str.contains(site)]
 
 import networkx as nx
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 GA = nx.from_pandas_edgelist(network, source="url", target="links_url")
 
