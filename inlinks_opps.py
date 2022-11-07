@@ -85,9 +85,9 @@ results["keyword"] = nltk_terms
 
 results['keyword'] = [','.join(map(str, l)) for l in results['keyword']]
 results.keyword.str.split(expand=True).stack().value_counts()
-
-keywords = results.keyword.str.split(expand=True).stack().value_counts()
 keywords.columns =["keyword","Frequency"]
+keywords = results.keyword.str.split(expand=True).stack().value_counts()
+
 
 st.header('Keyword Frequency')
 st.dataframe(keywords)
