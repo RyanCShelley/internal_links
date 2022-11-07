@@ -57,13 +57,3 @@ st.download_button(
     mime='text/csv',
 )
 
-
-import pandas as pd
-import numpy as np
-import altair as alt
-
-
-c = alt.Chart(results).mark_circle().encode(
-    x='url', y='total_inlinks', size='inlink_score', color='inlink_score')
-
-st.altair_chart(c, use_container_width=True)
