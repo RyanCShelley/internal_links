@@ -96,7 +96,7 @@ st.header('Keyword Frequency')
 
 col1, col2 = st.columns([3, 1])
 
-col1.plotly_chart(fig)
+col1.plotly_chart(fig,use_container_width=True)
 
 col2.dataframe(keywords)
 st.dataframe(keywords)
