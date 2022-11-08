@@ -25,7 +25,7 @@ st.set_page_config(layout="wide")
 
 image = Image.open('cropped-Simplified-Search-Logo.png')
 
-st.sidebar.image(image,width="150px")
+st.sidebar.image(image,width="150")
 st.sidebar.title('Internal Links Tool')
 st.sidebar.subheader('Add Your URL')
 site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibility="visible")
