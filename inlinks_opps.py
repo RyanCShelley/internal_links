@@ -19,24 +19,6 @@ import nltk.corpus
 nltk.download("stopwords")
 from nltk.corpus import stopwords
 
-def add_logo():
-    st.markdown(
-        """
-        <style>
-            [data-testid="stSidebarNav"] {
-                background-image: url(http://placekitten.com/200/200);
-                background-repeat: no-repeat;
-                padding-top: 120px;
-                background-position: 20px 20px;
-            }
-            
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-add_logo()
-
 
 st.set_page_config(layout="wide")
 st.sidebar.title('Internal Links Tool')
