@@ -128,7 +128,7 @@ inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('ca
 inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('author')]
 inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('tag')]
 
-st.dataframe(inlink_opps_score)
+st.dataframe(inlink_opps_score, use_container_width=True)
 
 
 st.header('Finding URLs to Link To')
