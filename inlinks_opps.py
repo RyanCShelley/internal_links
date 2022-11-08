@@ -20,8 +20,7 @@ nltk.download("stopwords")
 from nltk.corpus import stopwords
 
 
-def add_logo():
-    st.markdown(
+st.markdown(
         """
         <style>
             [data-testid="stSidebarNav"] {
