@@ -32,7 +32,8 @@ site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibilit
 
 if site is not None:
 	crawl(site, 'crawl.jl', follow_links=True)
-
+else: 
+	print('Please Add Your URL')
 crawl_df = pd.read_json('crawl.jl', lines=True)
 
 new_df = crawl_df[['url','title','links_url','body_text']]
