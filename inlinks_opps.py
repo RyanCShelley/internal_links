@@ -19,21 +19,30 @@ import nltk.corpus
 nltk.download("stopwords")
 from nltk.corpus import stopwords
 
-def add_bg_from_url():
+def add_logo():
     st.markdown(
-         f"""
-         <style>
-         .stApp {{
-             background-image: url("https://cdn.pixabay.com/photo/2019/04/24/11/27/flowers-4151900_960_720.jpg");
-             background-attachment: fixed;
-             background-size: cover
-         }}
-         </style>
-         """,
-         unsafe_allow_html=True
-     )
+        """
+        <style>
+            [data-testid="stSidebarNav"] {
+                background-image: url(http://placekitten.com/200/200);
+                background-repeat: no-repeat;
+                padding-top: 120px;
+                background-position: 20px 20px;
+            }
+            [data-testid="stSidebarNav"]::before {
+                content: "My Company Name";
+                margin-left: 20px;
+                margin-top: 20px;
+                font-size: 30px;
+                position: relative;
+                top: 100px;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
-add_bg_from_url() 
+add_logo() 
 
 
 
