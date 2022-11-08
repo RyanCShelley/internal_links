@@ -30,10 +30,13 @@ st.sidebar.title('Find Internal Links Opportunities')
 st.sidebar.subheader('Add Your URL')
 site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibility="visible")
 
-if site is not None:
+try:
 	crawl(site, 'crawl.jl', follow_links=True)
-else: 
+	
+except ValueError:
 	print('Please Add Your URL')
+
+	
 crawl_df = pd.read_json('crawl.jl', lines=True)
 
 new_df = crawl_df[['url','title','links_url','body_text']]
