@@ -42,10 +42,11 @@ def add_logo():
         unsafe_allow_html=True,
     )
 
+add_logo()
+
 
 st.set_page_config(layout="wide")
 st.sidebar.title('Internal Links Tool')
-add_logo()
 st.sidebar.subheader('Add Your URL')
 site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibility="visible")
 
