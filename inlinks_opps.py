@@ -18,15 +18,14 @@ import re
 import nltk.corpus
 nltk.download("stopwords")
 from nltk.corpus import stopwords
-
-
 from PIL import Image
-image = Image.open('cropped-Simplified-Search-Logo.png')
 
-st.image(image, caption='Simplified Search Logo')
 
 st.set_page_config(layout="wide")
-st.sidebar.image(image, caption='Simplified Search Logo')
+
+image = Image.open('cropped-Simplified-Search-Logo.png')
+
+st.sidebar.image(image,width="150px")
 st.sidebar.title('Internal Links Tool')
 st.sidebar.subheader('Add Your URL')
 site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibility="visible")
