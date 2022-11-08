@@ -21,6 +21,10 @@ from nltk.corpus import stopwords
 
 
 st.set_page_config(layout="wide")
+from PIL import Image
+image = Image.open('https://simplifiedsearch.net/wp-content/uploads/2020/12/cropped-Simplified-Search-Logo.png')
+
+st.sidebar.image(image, caption='Simplified Search')
 st.sidebar.title('Internal Links Tool')
 st.sidebar.subheader('Add Your URL')
 site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibility="visible")
