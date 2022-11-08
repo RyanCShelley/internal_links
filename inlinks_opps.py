@@ -19,12 +19,33 @@ import nltk.corpus
 nltk.download("stopwords")
 from nltk.corpus import stopwords
 
-from PIL import Image
-image = Image.open('https://simplifiedsearch.net/wp-content/uploads/2020/12/cropped-Simplified-Search-Logo.png')
+
+def add_logo():
+    st.markdown(
+        """
+        <style>
+            [data-testid="stSidebarNav"] {
+                background-image: url(https://simplifiedsearch.net/wp-content/uploads/2020/12/cropped-Simplified-Search-Logo.png);
+                background-repeat: no-repeat;
+                padding-top: 120px;
+                background-position: 20px 20px;
+            }
+            [data-testid="stSidebarNav"]::before {
+                content: "My Company Name";
+                margin-left: 20px;
+                margin-top: 20px;
+                font-size: 30px;
+                position: relative;
+                top: 100px;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
 
 
 st.set_page_config(layout="wide")
-st.sidebar.image(image, caption='Simplified Search')
 st.sidebar.title('Internal Links Tool')
 st.sidebar.subheader('Add Your URL')
 site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibility="visible")
