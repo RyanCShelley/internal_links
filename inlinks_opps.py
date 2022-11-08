@@ -31,7 +31,7 @@ st.sidebar.subheader('Add Your URL')
 site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibility="visible")
 
 if site == '':
-    print('User input is empty')
+    st.text("Add your URL and press enter to launch app" )
 
 else:
 	crawl(site, 'crawl.jl', follow_links=True)
