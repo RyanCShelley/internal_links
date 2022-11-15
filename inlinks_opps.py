@@ -60,7 +60,8 @@ else:
 	results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body_text','links_url']]
 	
 	@st.experimental_memo
-	def fetch_and_clean_data(url):
+	def fetch_and_clean_data(results):
+		data = results
 		return data
 	
 	results = fetch_and_clean_data(results)
