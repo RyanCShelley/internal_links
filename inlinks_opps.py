@@ -99,20 +99,6 @@ else:
 	st.header('Step 2:Finding URLs to Link To')
 	st.markdown('Using a URL from the dataframe above, we can search our website to find related content that may be suitable for a link.')
 	
-	with st.form("my_form"):
-		st.write("Inside the form")
-		slider_val = st.slider("Form slider")
-		checkbox_val = st.checkbox("Form checkbox")
-		
-	submitted = st.form_submit_button("Submit")
-	if submitted:
-		st.write("slider", slider_val, "checkbox", checkbox_val)
-		
-	st.write("Outside the form")
-	
-	form = st.form("my_form")
-	form.slider("Inside the form")
-	st.slider("Outside the form")
 
 	# Now add a submit button to the form:
 	form.form_submit_button("Submit")
@@ -127,6 +113,7 @@ else:
 	submitted = st.form_submit_button("Find Inlinks")
 	form = st.form("my_form")
 	form.form_submit_button("Find Inlinks")
+	
 	
 	if submitted:
 		st.balloons()
