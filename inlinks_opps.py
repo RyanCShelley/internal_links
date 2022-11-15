@@ -68,7 +68,7 @@ else:
 	
 
 	st.header('Step 1: Review Crawl Data')
-	st.session_state.dataframe(results, use_container_width=True)
+	st.dataframe(results, use_container_width=True)
 
 	@st.cache
 	def convert_df(results):
