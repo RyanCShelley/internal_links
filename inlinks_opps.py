@@ -124,16 +124,15 @@ else:
 		inlink_ops = inlink_ops[inlink_ops['inlink score'] > page_inlink_score]
 		inlink_ops = inlink_ops.drop(columns=['links_url','body_text'])
 		st.dataframe(inlink_ops, use_container_width=True)
-
-	 	@st.cache
-	 	def convert_df(inlink_ops):
-	 		return inlink_ops.to_csv().encode('utf-8')
-
-	 	csv = convert_df(inlink_ops)
-
-	 	st.download_button(
-	 		label="Download data as CSV",
-	 		data=csv,
-	 		file_name='internal_link_ops.csv',
-	 		mime='text/csv',
-	 		)
+		
+		@st.cache
+		def convert_df(inlink_ops):
+			return inlink_ops.to_csv().encode('utf-8')
+		
+		csv = convert_df(inlink_ops)
+		st.download_button(
+			label="Download data as CSV",
+			data=csv,
+			file_name='internal_link_ops.csv',
+			mime='text/csv',
+		)
