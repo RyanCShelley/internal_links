@@ -59,6 +59,9 @@ else:
 	results = results.sort_values(by='inlink score', ascending=False)
 	results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body_text','links_url']]
 	
+	@st.cache
+	def cache_df(results):
+		return results
 		
 	st.header('Step 1: Review Crawl Data')
 	st.dataframe(results, use_container_width=True)
