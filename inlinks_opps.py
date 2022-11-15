@@ -85,10 +85,7 @@ else:
 
 
 	st.header('Step 2: Finding URLs with Low Inlink Score')
-	st.text(
-		"""In this step we need to find URLs with low inlink scores. To do this, we are going to filter out the pages with higher inlink scores. 
-		 Using the filter below, set the max inlink score you want to filter out. For example, if you want to filter out links 
-		 with a score of 0.9 and above, add 0.9.""")
+	st.markdown("""In this step we need to find URLs with low inlink scores. To do this, we are going to filter out the pages with higher inlink scores. Using the filter below, set the max inlink score you want to filter out. For example, if you want to filter out links with a score of 0.9 and above, add 0.9.""")
 
 	results = results.dropna()
 	stop_words = stopwords.words('english')
