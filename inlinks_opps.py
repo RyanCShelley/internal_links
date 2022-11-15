@@ -35,7 +35,7 @@ if site == '':
 
 else:
 	@st.cache
-	def run_crawl:
+	def run_crawl(site):
 		crawl(site, 'crawl.jl', follow_links=True)
 		crawl_df = pd.read_json('crawl.jl', lines=True)
 		new_df = crawl_df[['url','title','links_url','body_text']]
