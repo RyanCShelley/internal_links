@@ -100,14 +100,13 @@ else:
 	st.markdown('Using a URL from the dataframe above, we can search our website to find related content that may be suitable for a link.')
 	
 	with st.form("my_form"):
-	target_url = st.text_input('What URL are you wanting to build links to')
-	target_keyword = st.text_input('What is the target keyword for the page you want to build links to')
-	target_keyword = target_keyword .lower()
-	st.markdown("""We only want to build inlinks from pages with a higher score than the page we are working on. So check the inlinks score of the page you are wanting to link from and add that number below""" )
-	page_inlink_score = st.number_input('Set URL Inlink Score')
+		target_url = st.text_input('What URL are you wanting to build links to')
+		target_keyword = st.text_input('What is the target keyword for the page you want to build links to')
+		target_keyword = target_keyword .lower()
+		st.markdown("""We only want to build inlinks from pages with a higher score than the page we are working on. So check the inlinks score of the page you are wanting to link from and add that number below""" )
+		page_inlink_score = st.number_input('Set URL Inlink Score')
 
-   # Every form must have a submit button.
-   	submitted = st.form_submit_button("Submit")
+   	submitted = st.form_submit_button("Submit Fields")
    	if submitted:
        		st.write("slider", slider_val, "checkbox", checkbox_val)
 
