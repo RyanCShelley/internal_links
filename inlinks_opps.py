@@ -97,12 +97,7 @@ else:
 
 
 	st.header('Step 2:Finding URLs to Link To')
-	st.markdown('Using a URL from the dataframe above, we can search our website to find related content that may be suitable for a link.')
-	
-
-	# Now add a submit button to the form:
-	form.form_submit_button("Submit")
-	
+	st.markdown('Using a URL from the dataframe above, we can search our website to find related content that may be suitable for a link.')	
 	with st.form("my_form"):
 		target_url = st.text_input('What URL are you wanting to build links to')
 		target_keyword = st.text_input('What is the target keyword for the page you want to build links to')
