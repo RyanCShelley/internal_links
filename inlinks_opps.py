@@ -118,8 +118,8 @@ else:
 	if target_url, target_keyword, page_inlink_score  == '':
 		st.text("Please add your filters" )
 
-	 else:
-	 	inlink_ops = results[results['body_text'].str.contains(target_keyword)]
+	else:
+		inlink_ops = results[results['body_text'].str.contains(target_keyword)]
 	 	inlink_ops = inlink_ops[~inlink_ops['links_url'].str.contains(target_url)]
 	 	inlink_ops = inlink_ops[inlink_ops['inlink score'] > page_inlink_score]
 	 	inlink_ops = inlink_ops.drop(columns=['links_url','body_text'])
