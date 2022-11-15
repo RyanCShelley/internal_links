@@ -110,7 +110,7 @@ else:
 	form.form_submit_button("Find Inlinks")
 	
 	if submitted:
-       		st.balloons()
+		st.balloons()
 		inlink_ops = results[results['body_text'].str.contains(target_keyword)]
 		inlink_ops = inlink_ops[~inlink_ops['links_url'].str.contains(target_url)]
 		inlink_ops = inlink_ops[inlink_ops['inlink score'] > page_inlink_score]
