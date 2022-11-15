@@ -31,7 +31,7 @@ st.sidebar.subheader('Add Your URL')
 site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibility="visible")
 
 if site == '':
-    st.text("Add your URL and press enter to launch app" )
+    st.markdown("Add your URL and press enter to launch app" )
 
 else:
 	crawl(site, 'crawl.jl', follow_links=True)
@@ -98,7 +98,7 @@ else:
 	max_score = st.number_input('Set Max Inlink Score')
 
 	if max_score == '':
-		st.text("Please set the max inlink score" )
+		st.markdown("Please set the max inlink score" )
 	else:
 		inlink_opps_score = results[results['inlink score'] < max_score]
 		inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('category')]
@@ -108,11 +108,11 @@ else:
 
 
 	st.header('Step 3:Finding URLs to Link To')
-	st.text('Once you have filtered the orginal dataset and found some URLs you want to improve, we know need to look for pages we can add internal links on. Use the filters below to find internal link opportunties to the page you are working on.')
+	st.markdown('Once you have filtered the orginal dataset and found some URLs you want to improve, we know need to look for pages we can add internal links on. Use the filters below to find internal link opportunties to the page you are working on.')
 	target_url = st.text_input('What URL are you wanting to build links to')
 	target_keyword = st.text_input('What is the target keyword for the page you want to build links to')
 	target_keyword = target_keyword .lower()
-	st.text("""We only want to build inlinks from pages with a higher score than the page we are working on. So check the inlinks score of the page you are wanting to link from and add that number below""" )
+	st.markdown("""We only want to build inlinks from pages with a higher score than the page we are working on. So check the inlinks score of the page you are wanting to link from and add that number below""" )
 	page_inlink_score = st.number_input('Set URL Inlink Score')
 
 	if target_url == '':
