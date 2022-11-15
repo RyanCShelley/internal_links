@@ -116,7 +116,7 @@ else:
 	page_inlink_score = st.number_input('Set URL Inlink Score')
 
 	if target_url == '':
-		st.text("Please add your filters" )
+		st.markdown("Please add your filters" )
 
 	else:
 		inlink_ops = results[results['body_text'].str.contains(target_keyword)]
