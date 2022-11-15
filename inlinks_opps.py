@@ -54,7 +54,20 @@ else:
 	results = results[['url', 'title', 'links on page', 'total_inlinks', 'body_text','links_url']]
 	
 		
-	st.header('Step 1: Review Crawl Data')
+	st.header('Step 1: Review Crawl Data & Calculate Inlink Score')
+	if 'count' not in st.session_state:
+		st.session_state.count = 0
+	inlink_score = []	
+	calculate = st.button('Calculate Score')
+	if calculate:
+		for link in results['total_inlinks']:
+			st.session_state.count = link/rows
+			inlink_score.append(st.session_state.count)
+
+	results["inlink score"] = inlink_score
+	results = results.sort_values(by='inlink score', ascending=False)
+
+	
 	st.dataframe(results, use_container_width=True)
 
 	@st.cache
