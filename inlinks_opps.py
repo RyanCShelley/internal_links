@@ -70,6 +70,7 @@ else:
 	results.body_text = results.apply(lambda row: " ".join(re.sub("[^a-zA-Z]+", " ", row.body_text).split()), 1)
 
 	max_score = results["inlink score"].quantile(q=0.9, interpolation='linear')
+	inlink_opps_score = inlink_opps_score[~inlink_ops["inlink score"].str.contains(max_score)]
 
 	inlink_opps_score = results[results['inlink score'] < max_score]
 	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('category')]
