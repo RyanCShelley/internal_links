@@ -69,7 +69,7 @@ else:
 	results.body_text = results.apply(lambda row: " ".join(filter(lambda x:x[0]!="@", row.body_text.split())), 1)
 	results.body_text = results.apply(lambda row: " ".join(re.sub("[^a-zA-Z]+", " ", row.body_text).split()), 1)
 
-	max_score = 0.9
+	max_score = results["inlink score"].quantile(q=0.9, interpolation='linear')
 
 	inlink_opps_score = results[results['inlink score'] < max_score]
 	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('category')]
@@ -77,6 +77,7 @@ else:
 	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('tag')]	
 		
 	st.header('Step 1: Review Results ')
+	
 	st.dataframe(inlink_opps_score, use_container_width=True)
 	
 
