@@ -51,25 +51,14 @@ else:
 	results = inlinks_df.merge(new_df)
 	results = results.drop_duplicates(subset=['url'])
 	rows = len(results.axes[0])
-	results = results[['url', 'title', 'links on page', 'total_inlinks', 'body_text','links_url']]
+	inlink_score = []
+	results["inlink score"] = inlink_score
+	results = results.sort_values(by='inlink score', ascending=False)
+	results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body_text','links_url']]
 	
 		
 	st.header('Step 1: Review Crawl Data & Calculate Inlink Score')
-	
-	if 'count' not in st.session_state:
-		st.session_state.count = 0
-	
-	increment = st.button('Increment')
-	if increment:
-		st.session_state.count += 1
 		
-	decrement = st.button('Decrement')
-	if decrement:
-		st.session_state.count -= 1
-		
-	st.write('Count = ', st.session_state.count)
-
-	
 	st.dataframe(results, use_container_width=True)
 
 	@st.cache
