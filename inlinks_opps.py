@@ -94,7 +94,7 @@ else:
 
 	max_score = st.number_input('Set Max Inlink Score')
 
-	if max_score == '0':
+	if max_score == '0.00':
 		st.markdown("Please set the max inlink score" )
 	else:
 		inlink_opps_score = results[results['inlink score'] < max_score]
