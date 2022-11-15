@@ -59,7 +59,7 @@ else:
 
 	results["inlink score"] = inlink_score
 	results = results.sort_values(by='inlink score', ascending=False)
-	results = results[['url', 'title', 'inlink score', 'total_inlinks','links on page', 'body_text']]
+	results = results[['url', 'title', 'inlink score', 'total_inlinks','links on page', 'links_url', 'body_text']]
 	results = results.dropna(subset=['title'])
 	results = results.dropna()
 	stop_words = stopwords.words('english')
