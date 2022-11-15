@@ -76,7 +76,7 @@ else:
 	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('tag')]	
 		
 	st.header('Step 1: Review Results ')
-	st.markup('The dataframe below shows a list of all pages could benefit from more internal links.')
+	st.markdown('The dataframe below shows a list of all pages could benefit from more internal links.')
 	
 	st.dataframe(inlink_opps_score, use_container_width=True)
 	
@@ -97,6 +97,7 @@ else:
 
 
 	st.header('Step 2:Finding URLs to Link To')
+	st.markdown('Using a URL from the dataframe above, we can search our website to find related content that may be suitable for a link.')
 	target_url = st.text_input('What URL are you wanting to build links to')
 	target_keyword = st.text_input('What is the target keyword for the page you want to build links to')
 	target_keyword = target_keyword .lower()
