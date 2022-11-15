@@ -107,12 +107,10 @@ else:
 		page_inlink_score = st.number_input('Set URL Inlink Score')
 	
 	submitted = st.form_submit_button("Submit Fields")
-	if submitted:
-       		st.write("slider", slider_val, "checkbox", checkbox_val)
-
+	form.form_submit_button("Find Inlinks")
 	
-	if st.button('Find Inlinks!'):
-		st.balloons()
+	if submitted:
+       		st.balloons()
 		inlink_ops = results[results['body_text'].str.contains(target_keyword)]
 		inlink_ops = inlink_ops[~inlink_ops['links_url'].str.contains(target_url)]
 		inlink_ops = inlink_ops[inlink_ops['inlink score'] > page_inlink_score]
