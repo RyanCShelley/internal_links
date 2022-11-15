@@ -60,17 +60,31 @@ else:
 	results["inlink score"] = inlink_score
 	results = results.sort_values(by='inlink score', ascending=False)
 	results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body_text','links_url']]
+	results = results.dropna(subset=['title'])
+	results = results.dropna()
+	stop_words = stopwords.words('english')
+	results['body_text'] = results['body_text'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop_words)]))
+
+	results.body_text = results.apply(lambda row: re.sub(r"http\S+", "", row.body_text).lower(), 1)
+	results.body_text = results.apply(lambda row: " ".join(filter(lambda x:x[0]!="@", row.body_text.split())), 1)
+	results.body_text = results.apply(lambda row: " ".join(re.sub("[^a-zA-Z]+", " ", row.body_text).split()), 1)
+
+	max_score = 0.9
+
+	inlink_opps_score = results[results['inlink score'] < max_score]
+	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('category')]
+	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('author')]
+	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('tag')]	
+		
+	st.header('Step 1: Review Results ')
+	st.dataframe(inlink_opps_score, use_container_width=True)
 	
-		
-	st.header('Step 1: Review Crawl Data')
-		
-	st.dataframe(results, use_container_width=True)
 
 	@st.cache
-	def convert_df(results):
+	def convert_df(inlink_opps_score):
 		return results.to_csv().encode('utf-8')
 
-	csv = convert_df(results)
+	csv = convert_df(inlink_opps_score)
 
 
 	st.download_button(
@@ -80,35 +94,8 @@ else:
 		mime='text/csv',
 		)
 
-	results = results.dropna(subset=['title'])
 
-
-
-	st.header('Step 2: Finding URLs with Low Inlink Score')
-	st.markdown("""In this step we need to find URLs with low inlink scores. To do this, we are going to filter out the pages with higher inlink scores. Using the filter below, set the max inlink score you want to filter out. For example, if you want to filter out links with a score of 0.9 and above, add 0.9.""")
-
-	results = results.dropna()
-	stop_words = stopwords.words('english')
-	results['body_text'] = results['body_text'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop_words)]))
-
-	results.body_text = results.apply(lambda row: re.sub(r"http\S+", "", row.body_text).lower(), 1)
-	results.body_text = results.apply(lambda row: " ".join(filter(lambda x:x[0]!="@", row.body_text.split())), 1)
-	results.body_text = results.apply(lambda row: " ".join(re.sub("[^a-zA-Z]+", " ", row.body_text).split()), 1)
-
-	max_score = st.number_input('Set Max Inlink Score')
-
-	if max_score == '0.00':
-		st.markdown("Please set the max inlink score" )
-	else:
-		inlink_opps_score = results[results['inlink score'] < max_score]
-		inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('category')]
-		inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('author')]
-		inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('tag')]
-		st.dataframe(inlink_opps_score, use_container_width=True)
-
-
-	st.header('Step 3:Finding URLs to Link To')
-	st.markdown('Once you have filtered the orginal dataset and found some URLs you want to improve, we know need to look for pages we can add internal links on. Use the filters below to find internal link opportunties to the page you are working on.')
+	st.header('Step 2:Finding URLs to Link To')
 	target_url = st.text_input('What URL are you wanting to build links to')
 	target_keyword = st.text_input('What is the target keyword for the page you want to build links to')
 	target_keyword = target_keyword .lower()
