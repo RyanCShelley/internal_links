@@ -127,6 +127,6 @@ else:
 			mime='text/csv',
 		)
 	else:
-		st.write('Fill out the for and click the button')
+		st.write('Fill out the form and click the button')
 
 
