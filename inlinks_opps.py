@@ -76,6 +76,7 @@ else:
 	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('tag')]	
 		
 	st.header('Step 1: Review Results ')
+	st.markeup('The dataframe below shows a list of all pages could benefit from more internal links.)
 	
 	st.dataframe(inlink_opps_score, use_container_width=True)
 	
@@ -102,8 +103,10 @@ else:
 	st.markdown("""We only want to build inlinks from pages with a higher score than the page we are working on. So check the inlinks score of the page you are wanting to link from and add that number below""" )
 	page_inlink_score = st.number_input('Set URL Inlink Score')
 
+	new_title = '<p style="font-family:sans-serif; color:Red; font-size: 42px;">"Please add your filters" </p>'
+
 	if target_url == '':
-		st.markdown("Please add your filters" )
+		st.markdown(new_title, unsafe_allow_html=True )
 
 	else:
 		inlink_ops = results[results['body_text'].str.contains(target_keyword)]
