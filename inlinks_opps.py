@@ -108,7 +108,7 @@ else:
 	submitted = st.form_submit_button("Find Inlinks")
 	form = st.form("my_form")
 	form.form_submit_button("Find Inlinks")
-	
+	st.form_submit_button("Find Inlinks")
 	
 	if submitted:
 		st.balloons()
