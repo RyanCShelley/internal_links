@@ -58,9 +58,9 @@ else:
 		if run_analysis:
 			for link in results['total_inlinks']:
 				score = link/rows
-				inlink_score.append(score)
+				st.session_state.inlink_score.append(score)
 
-	results["inlink score"] = inlink_score
+	results["inlink score"] = st.session_state.inlink_score
 	results = results.sort_values(by='inlink score', ascending=False)
 	results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body_text','links_url']]
 	
