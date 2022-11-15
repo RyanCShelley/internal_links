@@ -99,7 +99,6 @@ else:
 
 	if score == '':
 		st.text("Please set the max inlink score" )
-
 	else:
     	inlink_opps_score = results[results['inlink score'] < score]
     	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('category')]
