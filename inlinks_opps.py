@@ -115,7 +115,7 @@ else:
 	st.text("""We only want to build inlinks from pages with a higher score than the page we are working on. So check the inlinks score of the page you are wanting to link from and add that number below""" )
 	page_inlink_score = st.number_input('Set URL Inlink Score')
 
-	if target_url, target_keyword, page_inlink_score  == '':
+	if target_url == '':
 		st.text("Please add your filters" )
 
 	else:
