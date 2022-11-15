@@ -76,7 +76,7 @@ else:
 	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('tag')]	
 		
 	st.header('Step 1: Review Results ')
-	st.markeup('The dataframe below shows a list of all pages could benefit from more internal links.)
+	st.markeup('The dataframe below shows a list of all pages could benefit from more internal links.')
 	
 	st.dataframe(inlink_opps_score, use_container_width=True)
 	
