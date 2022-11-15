@@ -34,36 +34,36 @@ if site == '':
     st.markdown("Add your URL and press enter to launch app" )
 
 else:
-	crawl(site, 'crawl.jl', follow_links=True)
-	crawl_df = pd.read_json('crawl.jl', lines=True)
-	new_df = crawl_df[['url','title','links_url','body_text']]
-	new_df['links_url'] = new_df['links_url'].str.replace('@@',', ')
-	new_df = new_df.dropna(subset=['links_url'])
-	new_df['links_url'] = new_df['links_url'].str.split().apply(lambda x: OrderedDict.fromkeys(x).keys()).str.join(' ')
-	new_df['links on page'] = new_df['links_url'].str.split().str.len()
-	inlinks = new_df.links_url.str.split(expand=True).stack().value_counts()
-	inlinks_df = inlinks.to_frame()
-	inlinks_df.reset_index(inplace=True)
-	inlinks_df = inlinks_df.replace(',','', regex=True)
-	inlinks_df.columns = ["url","total_inlinks"]
-	inlinks_df = inlinks_df[inlinks_df["url"].str.contains(site)]
-	inlinks_df.sort_values(by=['total_inlinks'])
-	results = inlinks_df.merge(new_df)
-	results = results.drop_duplicates(subset=['url'])
-	rows = len(results.axes[0])
-
-
-	inlink_score = []
-
-	for link in results['total_inlinks']:
-		score = link/rows
-		inlink_score.append(score)
-
-	results["inlink score"] = inlink_score
-	results = results.sort_values(by='inlink score', ascending=False)
-	results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body_text','links_url']]
+	@st.cache
+	def run_crawl:
+		crawl(site, 'crawl.jl', follow_links=True)
+		crawl_df = pd.read_json('crawl.jl', lines=True)
+		new_df = crawl_df[['url','title','links_url','body_text']]
+		new_df['links_url'] = new_df['links_url'].str.replace('@@',', ')
+		new_df = new_df.dropna(subset=['links_url'])
+		new_df['links_url'] = new_df['links_url'].str.split().apply(lambda x: OrderedDict.fromkeys(x).keys()).str.join(' ')
+		new_df['links on page'] = new_df['links_url'].str.split().str.len()
+		inlinks = new_df.links_url.str.split(expand=True).stack().value_counts()
+		inlinks_df = inlinks.to_frame()
+		inlinks_df.reset_index(inplace=True)
+		inlinks_df = inlinks_df.replace(',','', regex=True)
+		inlinks_df.columns = ["url","total_inlinks"]
+		inlinks_df = inlinks_df[inlinks_df["url"].str.contains(site)]
+		inlinks_df.sort_values(by=['total_inlinks'])
+		results = inlinks_df.merge(new_df)
+		results = results.drop_duplicates(subset=['url'])
+		rows = len(results.axes[0])
+		inlink_score = []
+		for link in results['total_inlinks']:
+			score = link/rows
+			inlink_score.append(score)
+		results["inlink score"] = inlink_score
+		results = results.sort_values(by='inlink score', ascending=False)
+		results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body_text','links_url']]
+		return resuls
 	
-
+	results = run_crawl(site)
+	
 	st.header('Step 1: Review Crawl Data')
 	st.dataframe(results, use_container_width=True)
 
