@@ -120,10 +120,10 @@ else:
 
 	else:
 		inlink_ops = results[results['body_text'].str.contains(target_keyword)]
-	 	inlink_ops = inlink_ops[~inlink_ops['links_url'].str.contains(target_url)]
-	 	inlink_ops = inlink_ops[inlink_ops['inlink score'] > page_inlink_score]
-	 	inlink_ops = inlink_ops.drop(columns=['links_url','body_text'])
-	 	st.dataframe(inlink_ops, use_container_width=True)
+		inlink_ops = inlink_ops[~inlink_ops['links_url'].str.contains(target_url)]
+		inlink_ops = inlink_ops[inlink_ops['inlink score'] > page_inlink_score]
+		inlink_ops = inlink_ops.drop(columns=['links_url','body_text'])
+		st.dataframe(inlink_ops, use_container_width=True)
 
 	 	@st.cache
 	 	def convert_df(inlink_ops):
