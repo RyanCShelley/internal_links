@@ -29,10 +29,6 @@ st.sidebar.image(image)
 st.sidebar.title('Find Internal Links Opportunities')
 st.sidebar.subheader('Add Your URL')
 site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibility="visible")
-if st.button("Clear All"):
-    # Clear values from *all* memoized functions:
-    # i.e. clear values from both square and cube
-    st.experimental_memo.clear()
 
 if site == '':
     st.markdown("Add your URL and press enter to launch app" )
