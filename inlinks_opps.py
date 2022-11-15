@@ -104,7 +104,6 @@ else:
 		target_keyword = target_keyword .lower()
 		st.markdown("""We only want to build inlinks from pages with a higher score than the page we are working on. So check the inlinks score of the page you are wanting to link from and add that number below""" )
 		page_inlink_score = st.number_input('Set URL Inlink Score')
-		st.form_submit_button("Find Inlinks")
 		submitted = st.form_submit_button("Find Inlinks")
 	
 	
