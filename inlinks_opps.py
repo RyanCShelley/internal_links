@@ -58,7 +58,7 @@ else:
 		]
 	run_analysis = st.button('Run Inlink Score')
 	def inlink_score_changed():
-		if run_analysis
+		if run_analysis:
 			if st.session_state.new_todo:
 				for link in results['total_inlinks']:
 				score = link/rows
