@@ -100,11 +100,11 @@ else:
 	if score == '':
 		st.text("Please set the max inlink score" )
 	else:
-    	inlink_opps_score = results[results['inlink score'] < score]
-    	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('category')]
-    	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('author')]
-    	inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('tag')]
-    	st.dataframe(inlink_opps_score, use_container_width=True)
+		inlink_opps_score = results[results['inlink score'] < score]
+		inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('category')]
+		inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('author')]
+		inlink_opps_score = inlink_opps_score[~inlink_opps_score['url'].str.contains('tag')]
+		st.dataframe(inlink_opps_score, use_container_width=True)
 
 
 	st.header('Step 3:Finding URLs to Link To')
