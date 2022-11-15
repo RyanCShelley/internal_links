@@ -57,7 +57,7 @@ else:
 	st.header('Step 1: Review Crawl Data & Calculate Inlink Score')
 	
 	if 'count' not in st.session_state:
-	st.session_state.count = 0
+		st.session_state.count = 0
 	
 	increment = st.button('Increment')
 	if increment:
