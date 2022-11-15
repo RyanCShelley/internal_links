@@ -51,10 +51,7 @@ else:
 	results = inlinks_df.merge(new_df)
 	results = results.drop_duplicates(subset=['url'])
 	rows = len(results.axes[0])
-	inlink_score = []
-	results["inlink score"] = inlink_score
-	results = results.sort_values(by='inlink score', ascending=False)
-	results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body_text','links_url']]
+	results = results[['url', 'title', 'links on page','body_text','links_url']]
 	
 		
 	st.header('Step 1: Review Crawl Data & Calculate Inlink Score')
