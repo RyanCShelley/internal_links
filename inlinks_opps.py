@@ -103,13 +103,9 @@ else:
 	target_keyword = target_keyword .lower()
 	st.markdown("""We only want to build inlinks from pages with a higher score than the page we are working on. So check the inlinks score of the page you are wanting to link from and add that number below""" )
 	page_inlink_score = st.number_input('Set URL Inlink Score')
+	
+	if st.button('Find Inlinks!'):
 
-	new_title = '<p style="font-family:sans-serif; color:Red; font-size: 42px;">"Please add your filters" </p>'
-
-	if target_url == '':
-		st.markdown(new_title, unsafe_allow_html=True )
-
-	else:
 		inlink_ops = results[results['body_text'].str.contains(target_keyword)]
 		inlink_ops = inlink_ops[~inlink_ops['links_url'].str.contains(target_url)]
 		inlink_ops = inlink_ops[inlink_ops['inlink score'] > page_inlink_score]
@@ -127,3 +123,7 @@ else:
 			file_name='internal_link_ops.csv',
 			mime='text/csv',
 		)
+	else:
+		st.write('Click the Button')
+
+
