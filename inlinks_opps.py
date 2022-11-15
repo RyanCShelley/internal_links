@@ -51,28 +51,18 @@ else:
 	results = inlinks_df.merge(new_df)
 	results = results.drop_duplicates(subset=['url'])
 	rows = len(results.axes[0])
-	
-	if "inlink_score" not in st.session_state:
-		st.session_state.inlink_score = [
-			{"description": "NaN"},
-		]
-	run_analysis = st.button('Run Inlink Score')
-	def inlink_score_changed():
-		if run_analysis:
-			if st.session_state.new_todo:
-				for link in results['total_inlinks']:
-					score = link/rows
-					st.session_state.inlink_score.append(score)
+	inlink_score = []
 
-	results["inlink score"] = st.session_state.inlink_score
+	for link in results['total_inlinks']:
+		score = link/rows
+		inlink_score.append(score)
+
+	results["inlink score"] = inlink_score
 	results = results.sort_values(by='inlink score', ascending=False)
 	results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body_text','links_url']]
 	
-	
-	results = results[['url', 'title', 'links on page','body_text','links_url']]
-	
 		
-	st.header('Step 1: Review Crawl Data & Calculate Inlink Score')
+	st.header('Step 1: Review Crawl Data')
 		
 	st.dataframe(results, use_container_width=True)
 
