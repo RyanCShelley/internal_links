@@ -64,7 +64,7 @@ else:
 	results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body_text','links_url']]
 
 	st.header('Step 1: Review Crawl Data')
-	st.dataframe(results, use_container_width=True)
+	st.session_state.dataframe(results, use_container_width=True)
 
 	@st.cache
 	def convert_df(results):
