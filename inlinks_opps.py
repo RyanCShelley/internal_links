@@ -61,8 +61,8 @@ else:
 		if run_analysis:
 			if st.session_state.new_todo:
 				for link in results['total_inlinks']:
-				score = link/rows
-				st.session_state.inlink_score.append(score)
+					score = link/rows
+					st.session_state.inlink_score.append(score)
 
 	results["inlink score"] = st.session_state.inlink_score
 	results = results.sort_values(by='inlink score', ascending=False)
