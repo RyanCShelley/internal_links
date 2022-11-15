@@ -98,14 +98,22 @@ else:
 
 	st.header('Step 2:Finding URLs to Link To')
 	st.markdown('Using a URL from the dataframe above, we can search our website to find related content that may be suitable for a link.')
+	
+	with st.form("my_form"):
 	target_url = st.text_input('What URL are you wanting to build links to')
 	target_keyword = st.text_input('What is the target keyword for the page you want to build links to')
 	target_keyword = target_keyword .lower()
 	st.markdown("""We only want to build inlinks from pages with a higher score than the page we are working on. So check the inlinks score of the page you are wanting to link from and add that number below""" )
 	page_inlink_score = st.number_input('Set URL Inlink Score')
+
+   # Every form must have a submit button.
+   	submitted = st.form_submit_button("Submit")
+   	if submitted:
+       		st.write("slider", slider_val, "checkbox", checkbox_val)
+
 	
 	if st.button('Find Inlinks!'):
-
+		st.balloons()
 		inlink_ops = results[results['body_text'].str.contains(target_keyword)]
 		inlink_ops = inlink_ops[~inlink_ops['links_url'].str.contains(target_url)]
 		inlink_ops = inlink_ops[inlink_ops['inlink score'] > page_inlink_score]
