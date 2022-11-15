@@ -29,6 +29,10 @@ st.sidebar.image(image)
 st.sidebar.title('Find Internal Links Opportunities')
 st.sidebar.subheader('Add Your URL')
 site = st.sidebar.text_input("Add Your Website", max_chars=None, label_visibility="visible")
+if st.button("Clear All"):
+    # Clear values from *all* memoized functions:
+    # i.e. clear values from both square and cube
+    st.experimental_memo.clear()
 
 if site == '':
     st.markdown("Add your URL and press enter to launch app" )
@@ -59,13 +63,6 @@ else:
 	results = results.sort_values(by='inlink score', ascending=False)
 	results = results[['url', 'title', 'links on page', 'total_inlinks', 'inlink score', 'body_text','links_url']]
 	
-	@st.experimental_memo
-	def fetch_and_clean_data(results):
-		data = results
-		return data
-	
-	results = fetch_and_clean_data(results)
-
 		
 	st.header('Step 1: Review Crawl Data')
 	st.dataframe(results, use_container_width=True)
